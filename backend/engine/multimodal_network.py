@@ -37,6 +37,23 @@ def _travel_time(dist, mode):
     
     return dist / speed
 
+# Country pairs with no land freight link between them (separated by sea or by a third country).
+# Road/rail corridors between them — e.g. Iran<->Saudi Arabia rail across the Persian Gulf, or the
+# <200km road auto-wire bridging the Strait of Gibraltar — are physically impossible.
+NO_LAND_LINK = {frozenset(p) for p in [
+    ("China", "South Korea"), ("China", "Taiwan"), ("Russia", "South Korea"), ("Djibouti", "Sudan"),
+    ("Egypt", "Greece"), ("Iran", "Saudi Arabia"), ("Saudi Arabia", "Sudan"), ("Israel", "Turkey"),
+    ("Morocco", "Spain"), ("Russia", "Turkey"), ("Azerbaijan", "Kazakhstan"), ("Georgia", "Kazakhstan"),
+    ("Greece", "Italy"), ("Georgia", "Iran"), ("Thailand", "Vietnam"), ("Singapore", "Indonesia"),
+    ("Malaysia", "Indonesia"), ("UAE", "Iran"), ("Oman", "Iran"), ("Qatar", "Iran"), ("Denmark", "Sweden"),
+]}
+LAND_MODES = ("road", "rail")
+
+
+def land_link_allowed(h1, h2, mode):
+    return mode not in LAND_MODES or frozenset((h1["country"], h2["country"])) not in NO_LAND_LINK
+
+
 def load_canonical_hubs():
     path = os.path.join(os.path.dirname(__file__), '..', 'data', 'canonical_hubs.json')
     if os.path.exists(path):
@@ -104,6 +121,9 @@ def create_multimodal_network():
                            cost=profile["cost"], risk=profile["risk"])
 
     # 3. Add Strategic Intra-Mode Transit Edges
+    # Corridors are physical sea lanes / air routes / tracks and are traversable both ways. The
+    # registry lists ~700 connections on one side only, so adding u->v alone made routes
+    # direction-dependent and left nodes like the Cape of Good Hope unreachable.
     for hub in hubs:
         u_base = hub["id"]
         for conn in hub.get("connections", []):
@@ -115,12 +135,15 @@ def create_multimodal_network():
             
             if G.has_node(u_vnode) and G.has_node(v_vnode):
                 h1, h2 = hub, hub_lookup[v_base]
+                if not land_link_allowed(h1, h2, mode):
+                    continue
                 dist = _haversine(h1["lat"], h1["lon"], h2["lat"], h2["lon"])
                 t = _travel_time(dist, mode)
                 cost = dist * MODE_PROFILES[mode]["cost_per_km"]
                 
-                G.add_edge(u_vnode, v_vnode, baseline_time=t, distance=round(dist, 1), 
-                           transport_mode=mode, type="transit", cost=cost)
+                for a, b in ((u_vnode, v_vnode), (v_vnode, u_vnode)):
+                    G.add_edge(a, b, baseline_time=t, distance=round(dist, 1),
+                               transport_mode=mode, type="transit", cost=cost)
 
     # 4. Local Road Auto-wire (<200km)
     for i, h1 in enumerate(hubs):
@@ -128,7 +151,7 @@ def create_multimodal_network():
         for h2 in hubs[i+1:]:
             if "road" not in h2["modes"]: continue
             d = _haversine(h1["lat"], h1["lon"], h2["lat"], h2["lon"])
-            if d < 200:
+            if d < 200 and land_link_allowed(h1, h2, "road"):
                 u, v = f"{h1['id']}:road", f"{h2['id']}:road"
                 if G.has_node(u) and G.has_node(v) and not G.has_edge(u, v):
                     t = _travel_time(d, "road")

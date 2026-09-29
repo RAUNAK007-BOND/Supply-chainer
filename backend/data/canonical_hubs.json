@@ -2,49 +2,80 @@
   {
     "id": "AIR-SFO",
     "display_name": "San Francisco International Airport",
-    "aliases": ["SFO"],
+    "aliases": [
+      "SFO"
+    ],
     "type": "airport",
-    "modes": ["air", "road"],
+    "modes": [
+      "air",
+      "road"
+    ],
     "lat": 37.6213,
-    "lon": -122.3790,
+    "lon": -122.379,
     "country": "USA",
     "parent_city": "San Francisco",
     "importance": 9,
     "connections": [
-      {"to": "AIR-CHANGI", "mode": "air"},
-      {"to": "AIR-NARITA", "mode": "air"},
-      {"to": "HUB-SFO", "mode": "road"}
+      {
+        "to": "AIR-CHANGI",
+        "mode": "air"
+      },
+      {
+        "to": "AIR-NARITA",
+        "mode": "air"
+      },
+      {
+        "to": "HUB-SFO",
+        "mode": "road"
+      }
     ]
   },
   {
     "id": "HUB-SFO",
     "display_name": "San Francisco Logistics Park",
-    "aliases": ["SF Hub"],
+    "aliases": [
+      "SF Hub"
+    ],
     "type": "distribution_hub",
-    "modes": ["road"],
+    "modes": [
+      "road"
+    ],
     "lat": 37.7749,
     "lon": -122.4194,
     "country": "USA",
     "parent_city": "San Francisco",
     "importance": 7,
     "connections": [
-      {"to": "HUB-LOSANGELES", "mode": "road"}
+      {
+        "to": "HUB-LOSANGELES",
+        "mode": "road"
+      }
     ]
   },
   {
     "id": "HUB-CHICAGO",
     "display_name": "Chicago Strategic DC",
-    "aliases": ["ORD Hub"],
+    "aliases": [
+      "ORD Hub"
+    ],
     "type": "distribution_hub",
-    "modes": ["road"],
+    "modes": [
+      "road"
+    ],
     "lat": 41.8781,
     "lon": -87.6298,
     "country": "USA",
     "parent_city": "Chicago",
     "importance": 8,
     "connections": [
-      {"to": "AIR-CHICAGO", "mode": "road"},
-      {"to": "RAIL-CHICAGO", "mode": "road"}
+      {
+        "to": "AIR-CHICAGO",
+        "mode": "road"
+      },
+      {
+        "to": "RAIL-CHICAGO",
+        "mode": "road"
+      }
     ]
   },
   {
@@ -66,15 +97,35 @@
     "parent_city": "Suez Canal",
     "connections": [
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-ALGECIRAS",
         "mode": "sea"
       },
       {
         "to": "PORT-PIRAEUS",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-PORTSAID",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-PORTSAID2",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ALEXANDR",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-JEDDAH",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-PORTSUDAN",
+        "mode": "sea"
+      },
+      {
+        "to": "CHOKE-BABEL",
         "mode": "sea"
       }
     ]
@@ -106,6 +157,26 @@
       },
       {
         "to": "PORT-SAVANNAH",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-COLON",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-CARTAGENA",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-BALBOA",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-GUAYAQUIL",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-CALLAO",
         "mode": "sea"
       }
     ]
@@ -161,6 +232,26 @@
       {
         "to": "PORT-COLOMBO",
         "mode": "sea"
+      },
+      {
+        "to": "PORT-BANDARABBAS",
+        "mode": "sea"
+      },
+      {
+        "to": "HUB-JEBEL",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-FUJAIRAH",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SOHAR",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-GWADAR",
+        "mode": "sea"
       }
     ]
   },
@@ -183,11 +274,27 @@
     "parent_city": "Bab el-Mandeb Strait",
     "connections": [
       {
-        "to": "PORT-JEBEL",
+        "to": "PORT-COLOMBO",
         "mode": "sea"
       },
       {
-        "to": "PORT-COLOMBO",
+        "to": "PORT-DJIBOUTI",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ADEN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-BERBERA",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-PORTSUDAN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-JEDDAH",
         "mode": "sea"
       }
     ]
@@ -211,7 +318,11 @@
     "parent_city": "Bosphorus Strait",
     "connections": [
       {
-        "to": "PORT-JEBEL",
+        "to": "CHOKE-DARDANELLES",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-CONSTANTA",
         "mode": "sea"
       }
     ]
@@ -362,10 +473,6 @@
       },
       {
         "to": "PORT-SHANGHAI",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-JEBEL",
         "mode": "sea"
       },
       {
@@ -698,19 +805,11 @@
         "mode": "sea"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-COLOMBO",
         "mode": "sea"
       },
       {
         "to": "AIR-INCHEON",
-        "mode": "rail"
-      },
-      {
-        "to": "PORT-DALIAN",
         "mode": "rail"
       }
     ]
@@ -746,14 +845,6 @@
       {
         "to": "PORT-BUSAN",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-XIAMEN",
-        "mode": "rail"
-      },
-      {
-        "to": "PORT-SHENZHEN",
-        "mode": "rail"
       }
     ]
   },
@@ -879,10 +970,6 @@
       {
         "to": "PORT-COLOMBO",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-HAIPHONG",
-        "mode": "rail"
       },
       {
         "to": "PORT-PORTKLANG",
@@ -1043,15 +1130,7 @@
         "mode": "sea"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-BUSAN",
-        "mode": "sea"
-      },
-      {
-        "to": "CHOKE-SUEZ",
         "mode": "sea"
       },
       {
@@ -1119,10 +1198,6 @@
         "mode": "sea"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "RAIL-NHAVASHEVA",
         "mode": "rail"
       },
@@ -1163,10 +1238,6 @@
       {
         "to": "RAIL-AHMEDABAD",
         "mode": "road"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       },
       {
         "to": "PORT-COLOMBO",
@@ -1342,10 +1413,6 @@
         "mode": "sea"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "RAIL-KOCHI",
         "mode": "rail"
       },
@@ -1431,10 +1498,6 @@
       },
       {
         "to": "PORT-MUMBAI",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-JEBEL",
         "mode": "sea"
       },
       {
@@ -1538,26 +1601,6 @@
       {
         "to": "HUB-JEBEL",
         "mode": "road"
-      },
-      {
-        "to": "PORT-SINGAPORE",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-SHANGHAI",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-BUSAN",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-COLOMBO",
-        "mode": "sea"
-      },
-      {
-        "to": "CHOKE-SUEZ",
-        "mode": "sea"
       }
     ]
   },
@@ -1579,12 +1622,7 @@
     "importance": 8,
     "strategic_role": "Red Sea's primary container and Hajj logistics gateway",
     "parent_city": "Jeddah Islamic",
-    "connections": [
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      }
-    ]
+    "connections": []
   },
   {
     "id": "PORT-SALALAH",
@@ -1607,10 +1645,6 @@
       {
         "to": "PORT-DUQM",
         "mode": "road"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       },
       {
         "to": "PORT-COLOMBO",
@@ -1639,16 +1673,8 @@
     "parent_city": "Djibouti",
     "connections": [
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-COLOMBO",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-PORTSUDAN",
-        "mode": "rail"
       }
     ]
   },
@@ -1690,10 +1716,6 @@
       {
         "to": "PORT-MAPUTO",
         "mode": "rail"
-      },
-      {
-        "to": "PORT-ALGECIRAS",
-        "mode": "sea"
       }
     ]
   },
@@ -1724,14 +1746,6 @@
       {
         "to": "PORT-ROTTERDAM",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-VALENCIA",
-        "mode": "rail"
-      },
-      {
-        "to": "HUB-ZARAGOZA",
-        "mode": "rail"
       }
     ]
   },
@@ -1761,10 +1775,6 @@
       {
         "to": "RAIL-NAIROBI",
         "mode": "road"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       },
       {
         "to": "PORT-COLOMBO",
@@ -2274,6 +2284,42 @@
       {
         "to": "RAIL-LOSANGELES",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-LONGBEACH",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-OAKLAND",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SHANGHAI",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-NINGBO",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SHENZHEN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-HONGKONG",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-KAOHSIUNG",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-BUSAN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-YOKOHAMA",
+        "mode": "sea"
       }
     ]
   },
@@ -2319,6 +2365,34 @@
       {
         "to": "RAIL-LOSANGELES",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-LOSANGELES",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-OAKLAND",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SHANGHAI",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-NINGBO",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SHENZHEN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-BUSAN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-KAOHSIUNG",
+        "mode": "sea"
       }
     ]
   },
@@ -2366,6 +2440,34 @@
       {
         "to": "BORDER-BUFFALONIAGARA",
         "mode": "rail"
+      },
+      {
+        "to": "CHOKE-CAPEHATT",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-HALIFAX",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ROTTERDAM",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ANTWERP",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-HAMBURG",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-FELIXSTOWE",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ALGECIRAS",
+        "mode": "sea"
       }
     ]
   },
@@ -2415,6 +2517,14 @@
       },
       {
         "to": "CHOKE-PANAMA",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ROTTERDAM",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ALGECIRAS",
         "mode": "sea"
       }
     ]
@@ -2470,6 +2580,22 @@
       {
         "to": "HUB-DALLAS",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-BROWNSVILLE",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SAVANNAH",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ROTTERDAM",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ANTWERP",
+        "mode": "sea"
       }
     ]
   },
@@ -2500,6 +2626,22 @@
       {
         "to": "RAIL-SEATTLE",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-SEATTLE",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-PRINCE_RUPERT",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SHANGHAI",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-BUSAN",
+        "mode": "sea"
       }
     ]
   },
@@ -2614,20 +2756,24 @@
         "mode": "road"
       },
       {
-        "to": "PORT-ALGECIRAS",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-LAZAROCARDENAS",
         "mode": "rail"
       },
       {
         "to": "HUB-MONTERREY",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-LAZAROCARDENAS",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-LONGBEACH",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SHANGHAI",
+        "mode": "sea"
       }
     ]
   },
@@ -3077,10 +3223,6 @@
       },
       {
         "to": "PORT-BUSAN",
-        "mode": "rail"
-      },
-      {
-        "to": "PORT-DALIAN",
         "mode": "rail"
       }
     ]
@@ -4993,10 +5135,6 @@
       {
         "to": "PORT-JEBEL",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-COLOMBO",
-        "mode": "sea"
       }
     ]
   },
@@ -5071,10 +5209,6 @@
         "mode": "road"
       },
       {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-BUSAN",
         "mode": "sea"
       },
@@ -5085,6 +5219,14 @@
       {
         "to": "PORT-VANCOUVER",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-SHANGHAI",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-YOKOHAMA",
+        "mode": "sea"
       }
     ]
   },
@@ -5108,10 +5250,6 @@
     "parent_city": "Oakland",
     "connections": [
       {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-BUSAN",
         "mode": "sea"
       },
@@ -5122,6 +5260,14 @@
       {
         "to": "PORT-LOSANGELES",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-SHANGHAI",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-YOKOHAMA",
+        "mode": "sea"
       }
     ]
   },
@@ -5620,20 +5766,20 @@
         "mode": "road"
       },
       {
-        "to": "PORT-ALGECIRAS",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
-      },
-      {
         "to": "RAIL-MENDOZA",
         "mode": "rail"
       },
       {
         "to": "RAIL-BUENOSAIRES",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-IQUIQUE",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ARICA",
+        "mode": "sea"
       }
     ]
   },
@@ -5732,16 +5878,7 @@
     "importance": 6,
     "strategic_role": "Ecuador's primary port and banana/shrimp export gateway",
     "parent_city": "Guayaquil",
-    "connections": [
-      {
-        "to": "PORT-ALGECIRAS",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
-      }
-    ]
+    "connections": []
   },
   {
     "id": "AIR-SAOPAULO",
@@ -5939,6 +6076,14 @@
       {
         "to": "RAIL-OUAGADOUGOU",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-LOME",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-LAGOS",
+        "mode": "sea"
       }
     ]
   },
@@ -5964,10 +6109,6 @@
       {
         "to": "HUB-DARES",
         "mode": "road"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       },
       {
         "to": "PORT-COLOMBO",
@@ -6003,10 +6144,6 @@
     "parent_city": "Maputo",
     "connections": [
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-COLOMBO",
         "mode": "sea"
       },
@@ -6039,14 +6176,6 @@
     "strategic_role": "Cape route alternative gateway and reefer cargo hub",
     "parent_city": "Cape Town",
     "connections": [
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-COLOMBO",
-        "mode": "sea"
-      },
       {
         "to": "RAIL-JOBURG",
         "mode": "rail"
@@ -6090,19 +6219,11 @@
         "mode": "road"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-ROTTERDAM",
         "mode": "sea"
       },
       {
         "to": "PORT-HAIFA",
-        "mode": "rail"
-      },
-      {
-        "to": "PORT-PIRAEUS",
         "mode": "rail"
       }
     ]
@@ -6415,10 +6536,6 @@
       },
       {
         "to": "RAIL-HARBIN",
-        "mode": "rail"
-      },
-      {
-        "to": "AIR-INCHEON",
         "mode": "rail"
       }
     ]
@@ -7100,6 +7217,14 @@
       {
         "to": "PORT-SYDNEY",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-SYDNEY",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-BRISBANE",
+        "mode": "sea"
       }
     ]
   },
@@ -7134,6 +7259,14 @@
       {
         "to": "PORT-MELBOURNE",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-MELBOURNE",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-BRISBANE",
+        "mode": "sea"
       }
     ]
   },
@@ -7201,6 +7334,14 @@
       {
         "to": "RAIL-PERTH",
         "mode": "rail"
+      },
+      {
+        "to": "CHOKE-LOMBOK",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-MELBOURNE",
+        "mode": "sea"
       }
     ]
   },
@@ -7234,6 +7375,14 @@
       {
         "to": "RAIL-AUCKLAND",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-SYDNEY",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-BRISBANE",
+        "mode": "sea"
       }
     ]
   },
@@ -7370,10 +7519,6 @@
       {
         "to": "PORT-JEBEL",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-COLOMBO",
-        "mode": "sea"
       }
     ]
   },
@@ -7395,10 +7540,6 @@
     "strategic_role": "Oman's industrial port on Strait of Hormuz approach",
     "parent_city": "Sohar",
     "connections": [
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
       {
         "to": "PORT-COLOMBO",
         "mode": "sea"
@@ -7428,18 +7569,6 @@
       {
         "to": "PORT-JEBEL",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-COLOMBO",
-        "mode": "sea"
-      },
-      {
-        "to": "HUB-DAMMAM",
-        "mode": "rail"
-      },
-      {
-        "to": "ICD-RIYADH",
-        "mode": "rail"
       }
     ]
   },
@@ -7466,10 +7595,6 @@
       {
         "to": "PORT-GWADAR",
         "mode": "road"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       },
       {
         "to": "PORT-COLOMBO",
@@ -7590,10 +7715,6 @@
       {
         "to": "PORT-BUSAN",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-KAOHSIUNG",
-        "mode": "rail"
       },
       {
         "to": "PORT-SHENZHEN",
@@ -7824,14 +7945,6 @@
       {
         "to": "PORT-ALGECIRAS",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-THESSALONIKI",
-        "mode": "rail"
-      },
-      {
-        "to": "PORT-PIRAEUS",
-        "mode": "rail"
       }
     ]
   },
@@ -8414,20 +8527,20 @@
         "mode": "road"
       },
       {
-        "to": "PORT-ALGECIRAS",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-MANZANILLO",
         "mode": "rail"
       },
       {
         "to": "HUB-MONTERREY",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-MANZANILLO",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-LONGBEACH",
+        "mode": "sea"
       }
     ]
   },
@@ -8514,14 +8627,6 @@
       {
         "to": "AIR-PANAMA",
         "mode": "road"
-      },
-      {
-        "to": "PORT-ALGECIRAS",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
       }
     ]
   },
@@ -8643,11 +8748,43 @@
     "parent_city": "Good Hope",
     "connections": [
       {
-        "to": "PORT-JEBEL",
+        "to": "PORT-COLOMBO",
         "mode": "sea"
       },
       {
-        "to": "PORT-COLOMBO",
+        "to": "PORT-CAPETOWN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-DURBAN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ALGECIRAS",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-SANTOS",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-LAGOS",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-WALVISBAY",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-LUANDA",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-RICHARDSBAY",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-MAPUTO",
         "mode": "sea"
       }
     ]
@@ -9561,10 +9698,6 @@
       {
         "to": "PORT-BAKU",
         "mode": "rail"
-      },
-      {
-        "to": "RAIL-TBILISI",
-        "mode": "rail"
       }
     ]
   },
@@ -9904,10 +10037,6 @@
       },
       {
         "to": "HUB-DAMMAM",
-        "mode": "rail"
-      },
-      {
-        "to": "PORT-BANDARABBAS",
         "mode": "rail"
       }
     ]
@@ -10511,19 +10640,11 @@
     "parent_city": "Haifa",
     "connections": [
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-ROTTERDAM",
         "mode": "sea"
       },
       {
         "to": "PORT-ALEXANDR",
-        "mode": "rail"
-      },
-      {
-        "to": "RAIL-ISTANBUL",
         "mode": "rail"
       }
     ]
@@ -10616,10 +10737,6 @@
         "mode": "road"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-ROTTERDAM",
         "mode": "sea"
       }
@@ -10651,10 +10768,6 @@
       {
         "to": "CHOKE-SUEZ",
         "mode": "sea"
-      },
-      {
-        "to": "RAIL-KARS",
-        "mode": "rail"
       },
       {
         "to": "RAIL-TBILISI",
@@ -10942,10 +11055,6 @@
         "mode": "sea"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-CAPETOWN",
         "mode": "rail"
       },
@@ -10975,10 +11084,6 @@
     "connections": [
       {
         "to": "PORT-ALGECIRAS",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-JEBEL",
         "mode": "sea"
       }
     ]
@@ -11013,10 +11118,6 @@
       {
         "to": "RAIL-JOBURG",
         "mode": "road"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       },
       {
         "to": "PORT-COLOMBO",
@@ -11054,10 +11155,6 @@
       {
         "to": "PORT-COLOMBO",
         "mode": "sea"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       }
     ]
   },
@@ -11079,10 +11176,6 @@
     "strategic_role": "Horn of Africa alternate to Djibouti on Red Sea approach",
     "parent_city": "Berbera",
     "connections": [
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
       {
         "to": "PORT-COLOMBO",
         "mode": "sea"
@@ -11108,10 +11201,6 @@
     "parent_city": "Aden",
     "connections": [
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-COLOMBO",
         "mode": "sea"
       }
@@ -11135,24 +11224,7 @@
     "importance": 6,
     "strategic_role": "Red Sea western shore alternate bypassing Suez congestion",
     "parent_city": "Port Sudan",
-    "connections": [
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-ALGECIRAS",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-DJIBOUTI",
-        "mode": "rail"
-      },
-      {
-        "to": "ICD-RIYADH",
-        "mode": "rail"
-      }
-    ]
+    "connections": []
   },
   {
     "id": "PORT-FUJAIRAH",
@@ -11197,10 +11269,6 @@
         "mode": "road"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-COLOMBO",
         "mode": "sea"
       }
@@ -11227,10 +11295,6 @@
       {
         "to": "PORT-SALALAH",
         "mode": "road"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       },
       {
         "to": "PORT-COLOMBO",
@@ -11260,10 +11324,6 @@
       {
         "to": "PORT-KARACHI",
         "mode": "road"
-      },
-      {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
       },
       {
         "to": "PORT-COLOMBO",
@@ -11370,6 +11430,30 @@
       {
         "to": "PORT-SHANGHAI",
         "mode": "sea"
+      },
+      {
+        "to": "PORT-MURMANSK",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-ARKHANGELSK",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-NARVIK",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-VLADIVOSTOK",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-DALIAN",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-TIANJIN",
+        "mode": "sea"
       }
     ]
   },
@@ -11455,20 +11539,8 @@
     "parent_city": "Aktau",
     "connections": [
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-BAKU",
-        "mode": "rail"
-      },
-      {
-        "to": "RAIL-TBILISI",
-        "mode": "rail"
+        "mode": "sea"
       }
     ]
   },
@@ -11497,20 +11569,12 @@
         "mode": "road"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
+        "to": "RAIL-TBILISI",
+        "mode": "rail"
       },
       {
         "to": "RAIL-AKTAU",
-        "mode": "rail"
-      },
-      {
-        "to": "RAIL-TBILISI",
-        "mode": "rail"
+        "mode": "sea"
       }
     ]
   },
@@ -11807,6 +11871,14 @@
       {
         "to": "RAIL-LAPAZ",
         "mode": "rail"
+      },
+      {
+        "to": "PORT-IQUIQUE",
+        "mode": "sea"
+      },
+      {
+        "to": "PORT-CALLAO",
+        "mode": "sea"
       }
     ]
   },
@@ -11834,11 +11906,11 @@
         "mode": "road"
       },
       {
-        "to": "PORT-ALGECIRAS",
+        "to": "PORT-ARICA",
         "mode": "sea"
       },
       {
-        "to": "PORT-ROTTERDAM",
+        "to": "PORT-CALLAO",
         "mode": "sea"
       }
     ]
@@ -12365,10 +12437,6 @@
         "mode": "road"
       },
       {
-        "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
         "to": "PORT-ROTTERDAM",
         "mode": "sea"
       }
@@ -12418,10 +12486,6 @@
       },
       {
         "to": "PORT-JEBEL",
-        "mode": "sea"
-      },
-      {
-        "to": "PORT-COLOMBO",
         "mode": "sea"
       }
     ]
@@ -12539,15 +12603,7 @@
         "mode": "sea"
       },
       {
-        "to": "PORT-COLOMBO",
-        "mode": "sea"
-      },
-      {
         "to": "ICD-RIYADH",
-        "mode": "rail"
-      },
-      {
-        "to": "PORT-BANDARABBAS",
         "mode": "rail"
       }
     ]
@@ -13175,10 +13231,6 @@
       {
         "to": "RAIL-PRINCE_RUPERT",
         "mode": "road"
-      },
-      {
-        "to": "PORT-ROTTERDAM",
-        "mode": "sea"
       },
       {
         "to": "PORT-BUSAN",
@@ -21817,6 +21869,120 @@
       {
         "to": "RAIL-KHARAGPUR",
         "mode": "road"
+      }
+    ]
+  },
+  {
+    "id": "AIR-CHENNAI",
+    "display_name": "Chennai International Airport (MAA)",
+    "aliases": [
+      "MAA",
+      "Chennai Airport"
+    ],
+    "type": "airport",
+    "modes": [
+      "air",
+      "road"
+    ],
+    "lat": 12.9941,
+    "lon": 80.1709,
+    "country": "India",
+    "parent_city": "Chennai",
+    "importance": 8,
+    "connections": [
+      {
+        "to": "HUB-CHENNAI",
+        "mode": "road"
+      },
+      {
+        "to": "PORT-CHENNAI",
+        "mode": "road"
+      }
+    ]
+  },
+  {
+    "id": "RAIL-BHOPAL",
+    "display_name": "Bhopal Rail Freight Terminal",
+    "aliases": [
+      "Bhopal"
+    ],
+    "type": "rail_terminal",
+    "modes": [
+      "rail",
+      "road"
+    ],
+    "lat": 23.2599,
+    "lon": 77.4126,
+    "country": "India",
+    "parent_city": "Bhopal",
+    "importance": 6,
+    "connections": []
+  },
+  {
+    "id": "RAIL-VARANASI",
+    "display_name": "Varanasi Rail Freight Terminal",
+    "aliases": [
+      "Varanasi Rail"
+    ],
+    "type": "rail_terminal",
+    "modes": [
+      "rail",
+      "road"
+    ],
+    "lat": 25.3176,
+    "lon": 82.9739,
+    "country": "India",
+    "parent_city": "Varanasi",
+    "importance": 6,
+    "connections": [
+      {
+        "to": "AIR-VARANASI",
+        "mode": "road"
+      }
+    ]
+  },
+  {
+    "id": "RAIL-SAMBALPUR",
+    "display_name": "Sambalpur Rail Freight Terminal",
+    "aliases": [
+      "Sambalpur"
+    ],
+    "type": "rail_terminal",
+    "modes": [
+      "rail",
+      "road"
+    ],
+    "lat": 21.4669,
+    "lon": 83.9812,
+    "country": "India",
+    "parent_city": "Sambalpur",
+    "importance": 5,
+    "connections": []
+  },
+  {
+    "id": "RAIL-VISAKHAPATNAM",
+    "display_name": "Visakhapatnam Rail Freight Terminal",
+    "aliases": [
+      "Vizag Rail"
+    ],
+    "type": "rail_terminal",
+    "modes": [
+      "rail",
+      "road"
+    ],
+    "lat": 17.6868,
+    "lon": 83.2185,
+    "country": "India",
+    "parent_city": "Visakhapatnam",
+    "importance": 7,
+    "connections": [
+      {
+        "to": "PORT-VIZAG",
+        "mode": "road"
+      },
+      {
+        "to": "PORT-VIZAG",
+        "mode": "rail"
       }
     ]
   }

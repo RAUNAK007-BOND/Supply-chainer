@@ -10,6 +10,33 @@ Traditional supply chain routing algorithms (like Dijkstra or A*) rely on static
 
 ---
 
+## v2 — what changed (TatHack submission)
+
+**Fixed (silent logic bugs):** NLP anchors never loaded on CPU machines (all threat scores were 0);
+NLP noise-floor check inverted and calibration multiplier 10× too small; CARF filter logic inverted
+for sea/air; transit corridors one-directional (Cape of Good Hope unreachable); impossible sea lanes
+bypassing Suez/Bab el-Mandeb/Hormuz and rail lines across the Persian Gulf/Red Sea; scenario delays
+double-counted inside a hub; fabricated explanation numbers ("396% cheaper"); unknown hubs fed to the
+ML model as "Atlanta Air Hub"; cargo type, priority and PREFERRED policy silently ignored; audit trace
+double-counting; supplier cost score going negative; what-if requests mutating global state.
+
+**Built:** p85 quantile model wired into Dijkstra + p50/p95 companion models (confidence band);
+exact Shapley explanations per route; CARF for all four modes + threat typing; interactive Leaflet
+map; SQLite route history & comparison; live disruption broadcast with real-time alerts + automatic
+re-plans (WebSocket); signed webhooks; CSV / PDF / `supplychainer.shipment_plan.v1` TMS exports;
+live news intel scan; 80 automated tests; complete UI redesign (desktop + mobile).
+
+```bash
+pip install -r requirements.txt
+cd frontend && npm install && npm run build && cd ..
+uvicorn backend.main:app --port 8000        # serves API + built UI at http://127.0.0.1:8000
+python -m pytest                             # 80 backend tests
+python Code/train_quantile_band.py           # (re)train p50/p95 models — reproduces p85 bit-for-bit
+python Code/patch_registry_v2.py             # idempotent hub-registry integrity patch
+```
+
+---
+
 ##  Key Features
 
 * **Real-time Threat Intelligence**: Monitors global RSS feeds to detect local disruptions before they trap inventory.

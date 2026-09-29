@@ -176,7 +176,8 @@
   "Chennai": {
     "sea": "PORT-CHENNAI",
     "road": "PORT-CHENNAI",
-    "rail": "PORT-CHENNAI"
+    "rail": "PORT-CHENNAI",
+    "air": "AIR-CHENNAI"
   },
   "Visakhapatnam": {
     "sea": "PORT-VIZAG",
@@ -1257,10 +1258,6 @@
     "sea": "PORT-KLAIPEDA",
     "road": "PORT-KLAIPEDA",
     "rail": "PORT-KLAIPEDA"
-  },
-  "Kolkata": {
-    "rail": "RAIL-KOLKATA",
-    "road": "RAIL-KOLKATA"
   },
   "Hyderabad": {
     "rail": "RAIL-HYDERABAD",

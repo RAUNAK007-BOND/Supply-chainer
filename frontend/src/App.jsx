@@ -1,110 +1,154 @@
-import React, { useState, useEffect } from 'react';
-import BenchmarkCharts from './BenchmarkCharts.jsx';
-import RouteRecommender from './RouteRecommender.jsx';
-import SupplierIntelligence from './SupplierIntelligence.jsx';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Route, Factory, History, BellRing, Plug, X, AlertTriangle, Sun, Moon } from 'lucide-react';
+import Planner from './views/Planner.jsx';
+import SuppliersView from './views/SuppliersView.jsx';
+import HistoryView from './views/HistoryView.jsx';
+import AlertsView from './views/AlertsView.jsx';
+import IntegrationsView from './views/IntegrationsView.jsx';
+import { api, SEVERITY_COLOR } from './lib.js';
+
+const TABS = [
+  { id: 'planner', label: 'Plan a route', icon: Route },
+  { id: 'alerts', label: 'Disruptions', icon: BellRing },
+  { id: 'history', label: 'Saved routes', icon: History },
+  { id: 'suppliers', label: 'Suppliers', icon: Factory },
+  { id: 'integrations', label: 'Integrations', icon: Plug },
+];
+
+function useTheme() {
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem('sc-theme') || 'light'; } catch { return 'light'; }
+  });
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#161a23' : '#ffffff');
+    try { localStorage.setItem('sc-theme', theme); } catch { /* storage unavailable */ }
+  }, [theme]);
+  return [theme, () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))];
+}
+
+function useLiveStatus(onAlerts) {
+  const [status, setStatus] = useState(null);
+  const [connected, setConnected] = useState(false);
+  const cb = useRef(onAlerts);
+  cb.current = onAlerts;
+
+  useEffect(() => {
+    let ws, retry, poll, closed = false, everOpened = false, failures = 0, lastAlert = null;
+
+    // Fallback for hosts/proxies that block WebSockets: poll status + new alerts over HTTP.
+    const startPolling = () => {
+      const tick = async () => {
+        try {
+          const s = await api.status();
+          const alerts = await api.alerts();
+          const newest = alerts.reduce((m, a) => Math.max(m, a.id), 0);
+          const fresh = lastAlert == null ? [] : alerts.filter((a) => a.id > lastAlert).reverse();
+          lastAlert = newest;
+          setStatus({ ...s, live_scenario: s.live_scenario && { id: s.live_scenario.id, name: s.live_scenario.name } });
+          setConnected(true);
+          if (fresh.length) cb.current(fresh);
+        } catch { setConnected(false); }
+      };
+      tick();
+      poll = setInterval(tick, 3000);
+    };
+
+    const connect = () => {
+      const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      ws = new WebSocket(`${proto}//${window.location.host}/ws`);
+      ws.onopen = () => { everOpened = true; failures = 0; setConnected(true); };
+      ws.onmessage = (e) => {
+        const s = JSON.parse(e.data);
+        setStatus(s);
+        if (s.new_alerts?.length) cb.current(s.new_alerts);
+      };
+      ws.onclose = () => {
+        setConnected(false);
+        if (closed) return;
+        failures += 1;
+        if (!everOpened && failures >= 2) startPolling();
+        else retry = setTimeout(connect, 2500);
+      };
+    };
+    connect();
+    return () => { closed = true; clearTimeout(retry); clearInterval(poll); ws && ws.close(); };
+  }, []);
+  return { status, connected };
+}
 
 export default function App() {
-  const [network, setNetwork] = useState({ nodes: [], edges: [] });
-  const [status, setStatus] = useState(null);
-  const [currentView, setCurrentView] = useState('recommend');
-  
-  useEffect(() => {
-    fetch('/api/network')
-      .then(r => r.json())
-      .then(data => setNetwork(data))
-      .catch(e => console.error(e));
-      
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}/ws`;
-    const ws = new WebSocket(wsUrl);
-    ws.onmessage = (event) => {
-      const state = JSON.parse(event.data);
-      setStatus(state);
-    };
-    
-    return () => ws.close();
+  const [tab, setTab] = useState('planner');
+  const [toasts, setToasts] = useState([]);
+  const [openRun, setOpenRun] = useState(null); // {id, index} to load into the planner
+  const [alertsVersion, setAlertsVersion] = useState(0);
+
+  const pushAlerts = useCallback((alerts) => {
+    setToasts((t) => [...alerts.map((a) => ({ ...a, key: `${a.id}-${Date.now()}` })), ...t].slice(0, 4));
+    setAlertsVersion((v) => v + 1);
+    alerts.forEach((a) => setTimeout(() => setToasts((t) => t.filter((x) => x.id !== a.id)), 12000));
   }, []);
+  const { status, connected } = useLiveStatus(pushAlerts);
+  const [theme, toggleTheme] = useTheme();
 
-  if (currentView === 'recommend') {
-    return <RouteRecommender onNavigate={setCurrentView} />;
-  }
-
-  if (currentView === 'suppliers') {
-    return <SupplierIntelligence onNavigate={setCurrentView} />;
-  }
-
-  if (currentView === 'benchmark') {
-    return <BenchmarkCharts onBack={() => setCurrentView('recommend')} />;
-  }
+  const engine = status?.engine_status;
+  const engineDot = !connected ? 'crit' : engine === 'FULLY OPERATIONAL' ? 'ok' : engine === 'WARM-UP FAILED' ? 'crit' : 'warn';
+  const openInPlanner = (id, index = 0) => { setOpenRun({ id, index, nonce: Date.now() }); setTab('planner'); };
 
   return (
-    <div className="dashboard-container">
-      {/* GLOBAL LOGISTICS CONSOLE (Simulator View) */}
-      <div className="panel">
-        <h2 className="panel-title">System Console</h2>
-        <div className="metrics-grid">
-          <div className="metric-card">
-            <div style={{fontSize: '0.875rem', color: 'var(--text-muted)'}}>Active Hubs</div>
-            <div className="metric-value">{network?.nodes?.length || 0}</div>
-          </div>
-          <div className="metric-card">
-            <div style={{fontSize: '0.875rem', color: 'var(--text-muted)'}}>Transit Corridors</div>
-            <div className="metric-value">{network?.edges?.length || 0}</div>
-          </div>
-          <div className="metric-card">
-            <div style={{fontSize: '0.875rem', color: 'var(--text-muted)'}}>ML Brain</div>
-            <div className="metric-value" style={{fontSize: '1rem', color: 'var(--supply-accent)'}}>
-              p85 Real-Data (Active)
+    <div className="app">
+      <header className="topbar">
+        <div className="brand">
+          <div className="brand-mark"><Route size={18} strokeWidth={2.4} /></div>
+          <div><span className="name">Supplychainer</span><small>Smarter, disruption-aware shipping routes</small></div>
+        </div>
+        <nav className="nav" aria-label="Main">
+          {TABS.map(({ id, label, icon: Icon }) => (
+            <button key={id} className={tab === id ? 'active' : ''} onClick={() => setTab(id)} aria-current={tab === id}>
+              <Icon size={15} /> <span className="lbl">{label}</span>
+              {id === 'alerts' && status?.unacked_alerts > 0 && <span className="count">{status.unacked_alerts}</span>}
+            </button>
+          ))}
+        </nav>
+        <div className="topbar-right">
+          {status?.live_scenario && (
+            <button className="pill live" onClick={() => setTab('alerts')} title="A live disruption is active across the platform">
+              <span className="dot crit" /> Live: {status.live_scenario.name}
+            </button>
+          )}
+          <span className="pill engine" title={`Risk engine: ${engine || 'connecting'}${status?.nlp_ready ? ' · news analysis on' : ''}${status?.ml_trained ? ' · delay model loaded' : ''}`}>
+            <span className={`dot ${engineDot}`} />
+            {!connected ? 'Reconnecting…' : engine === 'FULLY OPERATIONAL' ? 'All systems ready' : engine === 'WARM-UP FAILED' ? 'Engine error' : 'Warming up…'}
+          </span>
+          <button className="theme-btn" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
+        </div>
+      </header>
+
+      <main className="view">
+        {tab === 'planner' && <Planner openRun={openRun} liveScenario={status?.live_scenario} theme={theme} />}
+        {tab === 'alerts' && <AlertsView version={alertsVersion} liveScenario={status?.live_scenario} onOpenRun={openInPlanner} />}
+        {tab === 'history' && <HistoryView onOpenRun={openInPlanner} />}
+        {tab === 'suppliers' && <SuppliersView />}
+        {tab === 'integrations' && <IntegrationsView />}
+      </main>
+
+      <div className="toasts" aria-live="polite">
+        {toasts.map((a) => (
+          <div key={a.key} className="toast panel" style={{ borderLeftColor: SEVERITY_COLOR[a.severity] }}>
+            <AlertTriangle size={18} color={SEVERITY_COLOR[a.severity]} />
+            <div>
+              <h5>{a.title}</h5>
+              <p>{a.message}</p>
+              {a.run_id && <button className="btn sm" style={{ marginTop: 8 }} onClick={() => openInPlanner(a.run_id, 0)}>Open route</button>}
             </div>
+            <button className="icon-btn" style={{ width: 24, height: 24, border: 0, boxShadow: 'none' }} aria-label="Dismiss"
+              onClick={() => setToasts((t) => t.filter((x) => x.key !== a.key))}><X size={13} /></button>
           </div>
-        </div>
-        
-        <div style={{display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: 'auto'}}>
-          <button className="dispatch-btn" onClick={() => setCurrentView('recommend')}>
-            Return to Optimization Dashboard
-          </button>
-          <button className="benchmark-btn" onClick={() => setCurrentView('benchmark')}>
-            View Scientific Benchmarks
-          </button>
-          <button className="dispatch-btn" style={{marginTop: '0.75rem', backgroundColor: '#8b5cf6'}} onClick={() => setCurrentView('suppliers')}>
-            Execute Supplier Intelligence Audit
-          </button>
-        </div>
-      </div>
-
-      {/* CENTER PANEL - GLOBAL SCOPE */}
-      <div className="panel" style={{padding: 0, overflow: 'hidden'}}>
-        <div className="map-container" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-           <div style={{textAlign: 'center', color: 'var(--text-muted)'}}>
-             <h3 style={{color: 'white', marginBottom: '1rem'}}>Global Supply Chain Core</h3>
-             <p>Analyzing {network.nodes.length} Strategic Logistics Hubs</p>
-             <p>Live RSS Ingestion Active for all transit corridors.</p>
-           </div>
-        </div>
-      </div>
-
-      {/* RIGHT PANEL - TRUTH AUDIT */}
-      <div className="panel">
-        <h2 className="panel-title">Inference Status</h2>
-        <div className="log-feed">
-          <div className="decision-card" style={{borderColor: 'var(--supply-accent)'}}>
-             <div className="decision-header">
-               <span>PROVENANCE: UNCTAD/STB</span>
-             </div>
-             <div className="decision-body">
-               Real-world historical metrics loaded for all nodes. No synthetic fallback active.
-             </div>
-          </div>
-          <div className="decision-card">
-             <div className="decision-header">
-               <span>LATENCY: SUB-SECOND</span>
-             </div>
-             <div className="decision-body">
-               Live geocoding and news-anchored semantic scoring active.
-             </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 }
+

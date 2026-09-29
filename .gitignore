@@ -5,3 +5,13 @@ __pycache__/
 venv/
 env/
 .env
+# Supplychainer runtime data
+backend/data/*.db
+backend/data/*.db-*
+.pytest_cache/
+deploy/_space_build/
+deploy/_render_build/
+
+# Dependencies (install with npm install)
+frontend/node_modules/
+node_modules/
