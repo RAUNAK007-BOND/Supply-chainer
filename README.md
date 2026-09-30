@@ -2,6 +2,8 @@
 
 > **An NLP-driven Risk Assessment API & Executive Command Dashboard for Dynamic Supply Chain Graph Routing.**
 
+**🌐 Live demo: [supplychainer.onrender.com](https://supplychainer.onrender.com/)**
+
 Traditional supply chain routing algorithms (like Dijkstra or A*) rely on static distances. But in the real world, supply chains are disrupted by dynamic **Black Swan events**—hurricanes, worker strikes, and geopolitical blockades. 
 
 **Supplychainer** is a dual-component platform:
