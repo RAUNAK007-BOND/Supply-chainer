@@ -43,11 +43,15 @@ We used AI heavily for the v2 work and are disclosing it in line with the TatHac
 
 **Tool:** Claude Code (Anthropic, Claude Opus model), an AI coding agent that ran in our local repo.
 
-**Debugging was done by the team and the AI together:**
+**The code was written by Claude Code and our team together.** Claude Code wrote most of the
+v2 code. We wrote and edited code ourselves as well, reviewed every change, and accepted, changed
+or rejected each one.
+
+**Debugging (team + AI):**
 - *Team:* ran the app against real scenarios (for example `SUEZ_BLOCK`), spotted outputs that
-  didn't make sense, and found some of the bugs ourselves. We reviewed each fix, accepting,
-  changing or rejecting it. Afterwards we re-ran the scenarios and tests to confirm the fixes held.
-- *AI:* traced the root causes and wrote most of the fix code for the silent logic bugs:
+  didn't make sense, and found some of the bugs ourselves. We coded parts of the fixes, then
+  re-ran the scenarios and tests to confirm they held.
+- *AI:* traced root causes and wrote most of the fix code for the silent logic bugs:
   - NLP anchor loading
   - noise floor and calibration
   - CARF inversion
@@ -58,8 +62,8 @@ We used AI heavily for the v2 work and are disclosing it in line with the TatHac
   - invented explanation figures
   - supplier scoring
 
-**What else the AI did:** most of the new v2 features were written by Claude Code in sessions our
-team directed:
+**Features (team + AI):** our team chose and directed the features. Claude Code wrote most of the
+code and we coded and adjusted parts of it:
 - wiring the p85 quantile model into Dijkstra, and training the p50/p95 companions
   (`Code/train_quantile_band.py`)
 - the exact Shapley explanations, CARF for all four modes, and threat typing
@@ -67,11 +71,10 @@ team directed:
 - the 80-test pytest suite
 - the frontend redesign and the Leaflet map
 - the Render / Hugging Face deploy bundles
-- drafting parts of this README
+- this README (drafted with AI help)
 
-**What else the team did:** chose which bugs and features to take on and in what order, reviewed
-the feature work, and made the final submission decisions. The original codebase comes from the
-TatHack organisers (first commit).
+**Decisions:** our team chose which bugs and features to take on and in what order, and made the
+final submission decisions. The original codebase comes from the TatHack organisers (first commit).
 
 **Understanding:** every team member has worked through the code with
 [`docs/CODEBASE_WALKTHROUGH.md`](docs/CODEBASE_WALKTHROUGH.md) and can explain how the system
