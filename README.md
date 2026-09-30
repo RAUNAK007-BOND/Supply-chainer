@@ -43,11 +43,23 @@ We used AI heavily for the v2 work and are disclosing it in line with the TatHac
 
 **Tool:** Claude Code (Anthropic, Claude Opus model), an AI coding agent that ran in our local repo.
 
-**What the AI did:** most of the v2 code changes listed above were written by Claude Code in
-sessions our team directed. That includes:
-- finding and fixing the silent logic bugs (NLP anchor loading, noise floor and calibration,
-  CARF inversion, one-way corridors, impossible sea and rail links, double-counted delays, ignored
-  cargo, priority and policy inputs, invented explanation figures, supplier scoring)
+**Debugging was done by the team and the AI together:**
+- *Team:* ran the app against real scenarios (for example `SUEZ_BLOCK`), spotted outputs that
+  didn't make sense, and found some of the bugs ourselves. We reviewed each fix, accepting,
+  changing or rejecting it. Afterwards we re-ran the scenarios and tests to confirm the fixes held.
+- *AI:* traced the root causes and wrote most of the fix code for the silent logic bugs:
+  - NLP anchor loading
+  - noise floor and calibration
+  - CARF inversion
+  - one-way corridors
+  - impossible sea and rail links
+  - double-counted delays
+  - ignored cargo, priority and policy inputs
+  - invented explanation figures
+  - supplier scoring
+
+**What else the AI did:** most of the new v2 features were written by Claude Code in sessions our
+team directed:
 - wiring the p85 quantile model into Dijkstra, and training the p50/p95 companions
   (`Code/train_quantile_band.py`)
 - the exact Shapley explanations, CARF for all four modes, and threat typing
@@ -57,10 +69,9 @@ sessions our team directed. That includes:
 - the Render / Hugging Face deploy bundles
 - drafting parts of this README
 
-**What the team did:** chose which bugs and features to take on and in what order, ran the app
-against real scenarios (for example `SUEZ_BLOCK`), reviewed and accepted or rejected the changes,
-and made the final submission decisions. The original codebase comes from the TatHack
-organisers (first commit).
+**What else the team did:** chose which bugs and features to take on and in what order, reviewed
+the feature work, and made the final submission decisions. The original codebase comes from the
+TatHack organisers (first commit).
 
 **Understanding:** every team member has worked through the code with
 [`docs/CODEBASE_WALKTHROUGH.md`](docs/CODEBASE_WALKTHROUGH.md) and can explain how the system
