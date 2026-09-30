@@ -37,6 +37,37 @@ python Code/patch_registry_v2.py             # idempotent hub-registry integrity
 
 ---
 
+## AI Usage Disclosure
+
+We used AI heavily for the v2 work and are disclosing it in line with the TatHack rules.
+
+**Tool:** Claude Code (Anthropic, Claude Opus model), an AI coding agent that ran in our local repo.
+
+**What the AI did:** most of the v2 code changes listed above were written by Claude Code in
+sessions our team directed. That includes:
+- finding and fixing the silent logic bugs (NLP anchor loading, noise floor and calibration,
+  CARF inversion, one-way corridors, impossible sea and rail links, double-counted delays, ignored
+  cargo, priority and policy inputs, invented explanation figures, supplier scoring)
+- wiring the p85 quantile model into Dijkstra, and training the p50/p95 companions
+  (`Code/train_quantile_band.py`)
+- the exact Shapley explanations, CARF for all four modes, and threat typing
+- SQLite history, alerts, webhooks, and the CSV/PDF/TMS exports
+- the 80-test pytest suite
+- the frontend redesign and the Leaflet map
+- the Render / Hugging Face deploy bundles
+- drafting parts of this README
+
+**What the team did:** chose which bugs and features to take on and in what order, ran the app
+against real scenarios (for example `SUEZ_BLOCK`), reviewed and accepted or rejected the changes,
+and made the final submission decisions. The original codebase comes from the TatHack
+organisers (first commit).
+
+**Understanding:** every team member has worked through the code with
+[`docs/CODEBASE_WALKTHROUGH.md`](docs/CODEBASE_WALKTHROUGH.md) and can explain how the system
+works and why each fix was needed.
+
+---
+
 ##  Key Features
 
 * **Real-time Threat Intelligence**: Monitors global RSS feeds to detect local disruptions before they trap inventory.
